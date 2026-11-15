@@ -1,20 +1,23 @@
 # Driving the online application in a browser
 
-How the agent fills in the Home Office form and uploads evidence itself, with the human taking over at fixed points. Read this before phase 8. Only start after `preflight.py` prints GO.
+How the agent fills in the Home Office form and uploads evidence itself, with the human taking over at fixed points. This only applies after the human has accepted the takeover offer (SKILL.md, phase 8), which in turn needs `preflight.py` to print GO.
 
-## 1. Pick a browser tool
+## 1. Find out what browser control this harness has
 
-Use whichever browser control the host agent has. In rough order of preference:
+Agents run in very different hosts (CLI coding agents, IDEs, desktop apps, chat apps), and each exposes browser control differently, if at all. So detect rather than assume, cheapest checks first, and stop at the first one that works:
 
-| Tool | Notes |
-|---|---|
-| Playwright MCP (`@playwright/mcp`) | Accessibility-tree snapshots, reliable form filling, `browser_file_upload` for uploads. Best default. |
-| Chrome DevTools MCP / a browser extension that controls the user's own Chrome | Works in the user's real, logged-in browser; good for hand-offs. |
-| Computer-use / screen control | Last resort: slower and coordinate-based, so verify every field visually. |
+1. **Your own tool list.** Look for tools whose names or descriptions mention browser, page, navigate, click, snapshot, playwright, puppeteer, chrome, or computer/screen control. If you find them, that is the route.
+2. **MCP servers configured but not loaded.** If you have a shell, ask the harness CLI what is configured (for example `claude mcp list`, `codex mcp list`, or the host's settings file). A configured but disconnected browser server usually needs a restart or reconnect by the human.
+3. **Browser CLIs on the machine.** If you have a shell, check `command -v` for tools such as `agent-browser`, `playwright`, `browser-use`, and `npx`. A CLI you can call from the shell (snapshot, fill, click, upload, screenshot) works as well as an MCP tool.
+4. **Nothing found.** Tell the human what is missing and offer the choices below. Don't install or configure anything without a yes, because it changes their setup:
+   - Add a browser tool. For example, Playwright MCP (`npx @playwright/mcp@latest`, registered with the host's "add MCP server" command or config) or a browser CLI. Say that a restart may be needed and that the session can resume from `submit/form-log.md`.
+   - **Guided mode**: the human drives the browser, and the agent reads each page from screenshots or pasted text and gives the exact answer from `FORM_GUIDE.md`. Slower, but needs no setup.
 
-If none is available, say so and offer to walk the human through it field by field from `FORM_GUIDE.md` instead. Don't install browser tooling without asking.
+When you've found a tool, run a **smoke test** before relying on it: open the gov.uk start page, take a snapshot, and confirm you can read the headings. Then tell the human which tool you'll use.
 
-Use a **headed** (visible) browser so the human can watch and take over. One tab, one application.
+Preference when several are available: structured page access (accessibility tree / DOM, e.g. Playwright-style tools) over raw screen control, because filling by field label is more reliable than clicking coordinates. Use computer/screen control only as a last resort, and verify every field visually.
+
+Use a **visible** browser window, so the human can watch and take over at any moment. One tab, one application.
 
 ## 2. Who does what
 

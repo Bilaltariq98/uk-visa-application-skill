@@ -1,7 +1,7 @@
 ---
 name: uk-visa-application
 license: MIT
-description: Guide a person through preparing and filling in a UK visa or immigration application agentically, with the human in the loop. Covers intake interview, evidence-pack folders, safe document triage, gap analysis against current Home Office rules, request letters (employer, landlord, council, HMRC), cover letter, a GO/NO-GO preflight, and a browser-agent form guide that stops before payment and submission. Use this whenever someone mentions a UK visa, extension, FLR, ILR, spouse/partner/family visa, Skilled Worker, eVisa, BRP, Home Office application, "leave to remain", sponsor evidence, payslips for a visa, proof of address for a visa, or wants help gathering documents or filling in a UK immigration form, even if they don't say "skill".
+description: Guide a person through preparing and filling in a UK visa or immigration application agentically, with the human in the loop. Covers intake interview, evidence-pack folders, safe document triage, gap analysis against current Home Office rules, request letters (employer, landlord, council, HMRC), cover letter, a GO/NO-GO preflight, then offers to take over the browser (detecting whatever browser tools the harness has) to fill the online form and upload evidence, stopping before payment and submission. Use this whenever someone mentions a UK visa, extension, FLR, ILR, spouse/partner/family visa, Skilled Worker, eVisa, BRP, Home Office application, "leave to remain", sponsor evidence, payslips for a visa, proof of address for a visa, or wants help gathering documents or filling in a UK immigration form, even if they don't say "skill".
 ---
 
 # UK visa application (agent-assisted, human-led)
@@ -82,15 +82,24 @@ Draft `06 Cover letter/cover-letter-draft.md`: one numbered section per requirem
 
 `python3 submit/preflight.py` (run from the workspace root) checks: permission not expired, IDs valid, rules recently verified, required files present, dated documents fresh, monthly series complete, placeholders filled, open risks cleared. It prints the upload list on GO. `--today YYYY-MM-DD` simulates a date; `--selftest` checks the logic. Edit `case.json`, not the script.
 
-### 8. Form filling (browser agent)
+### 8. Ready to submit: offer to take over
 
-Only after GO. The agent drives the browser itself (fills pages, uploads evidence) using `submit/FORM_GUIDE.md` for answers and `references/browser-agent.md` for how: tool choice, hand-offs (the human signs in, handles 2FA and payment), the page-by-page fill/verify/screenshot loop, uploads, and prompt-injection safety. Hard stops, because these steps are irreversible or legally binding:
+When preflight prints GO, pause and say so plainly. Then offer a choice, because some people want to click every button themselves and others would rather the agent did the typing:
 
-- Never pay, accept the declaration, or click the final submit. Stop and wait until the human types "submit".
-- Never invent an answer. Anything not in the guide, or marked CONFIRM, pauses and asks.
-- Benefits, criminality, refusals, breaches, deception questions: always pause and confirm wording, even if the guide has a draft.
-- Copy spellings exactly from passports. Upload only the files the preflight lists. One application only; on timeout, sign back in.
-- Screenshot each section; save the application reference.
+> Everything checks out (preflight GO, submit by <date>). How do you want to fill in the online form?
+> 1. **I take over the browser**: I fill in each page and upload the evidence. You sign in, enter security codes, check my summary, and do the declaration and payment yourself.
+> 2. **Guided**: you drive, and I give you the exact answer for each question.
+> 3. **Not yet**: we stop here and pick it up later (re-run the preflight first).
+
+If they choose takeover, read `references/browser-agent.md`. It explains how to discover what browser control this particular harness has (your tool list, configured MCP servers, browser CLIs on the machine), what to offer if there is none, the hand-off points, the page-by-page fill/verify/screenshot loop, uploads, and how to treat page content safely. Answers always come from `submit/FORM_GUIDE.md`.
+
+In either mode, these stops hold. Each protects something that can't be undone, or a statement the applicant is legally responsible for:
+
+- Don't pay, accept the declaration, or press the final submit. Stop there and wait until the human types "submit". Payment is irreversible, and the declaration is a legal statement only the applicant can make.
+- Don't invent an answer. Anything not in the guide, or marked CONFIRM, means pause and ask, because a wrong answer can be treated as deception.
+- Benefits, criminality, refusals, breaches and deception questions: confirm the wording with the human every time, even when the guide has a draft. These are the answers most likely to decide the outcome.
+- Copy spellings exactly from passports, and upload only the files the preflight lists. Keep to one application; after a timeout, sign back in rather than starting again, because duplicates confuse caseworking.
+- Screenshot each section and save the application reference, so there's a record of exactly what was submitted.
 
 ## Handling personal data
 
@@ -102,5 +111,5 @@ This is sensitive personal and immigration data. Keep it local. Don't send it to
 - `references/partner-route.md`: spouse/partner (FM / FM-SE) evidence map, with what to re-verify.
 - `references/gotchas.md`: traps found in real applications. Skim this before the gap analysis.
 - `references/letter-templates.md`: employer, landlord/agent, council inspection, HMRC benefit-claim letters.
-- `references/browser-agent.md`: how to drive the online form and uploads in a browser, with human hand-offs. Read before phase 8.
+- `references/browser-agent.md`: detecting browser tools, then driving the online form and uploads with human hand-offs. Read once the human accepts takeover.
 - `assets/case.example.json`, `assets/FORM_GUIDE.template.md`, `scripts/preflight.py`.

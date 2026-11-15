@@ -48,7 +48,7 @@ The agent works through eight phases with you, asking questions at each step rat
 | 5 | **Request letters** | The agent drafts letters to your employer, landlord or letting agent, council and HMRC, **in your own tone** (paste an example email). |
 | 6 | **Cover letter** | The agent writes one section per requirement, each pointing to its evidence, and discloses any risks openly. |
 | 7 | **Preflight** | A GO / NO-GO script checks expiry, IDs, files, document freshness, placeholders and open risks. |
-| 8 | **Form filling** | The agent takes over the browser (Playwright MCP, Chrome DevTools MCP or computer use): it fills each page from `FORM_GUIDE.md`, verifies, screenshots, logs, and uploads the evidence. You sign in, handle 2FA and enter payment details; it **never pays or submits until you type `submit`**. |
+| 8 | **Ready to submit** | On GO, the agent offers to **take over the browser**, guide you instead, or wait. If you choose takeover, it detects which browser tools your harness has (its tool list, configured MCP servers, browser CLIs), runs a quick test, then fills each page from `FORM_GUIDE.md`, checks it, screenshots and logs it, and uploads the evidence. You sign in, handle 2FA and enter payment details; it **never pays or submits until you type `submit`**. |
 
 The skill covers spouse/partner routes in most depth (Appendix FM / FM-SE). The workflow itself works for any route.
 
