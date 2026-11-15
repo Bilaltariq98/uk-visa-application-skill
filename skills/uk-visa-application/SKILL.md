@@ -84,7 +84,7 @@ Draft `06 Cover letter/cover-letter-draft.md`: one numbered section per requirem
 
 ### 8. Form filling (browser agent)
 
-Only after GO. Follow `submit/FORM_GUIDE.md`. Hard stops, because these steps are irreversible or legally binding:
+Only after GO. The agent drives the browser itself (fills pages, uploads evidence) using `submit/FORM_GUIDE.md` for answers and `references/browser-agent.md` for how: tool choice, hand-offs (the human signs in, handles 2FA and payment), the page-by-page fill/verify/screenshot loop, uploads, and prompt-injection safety. Hard stops, because these steps are irreversible or legally binding:
 
 - Never pay, accept the declaration, or click the final submit. Stop and wait until the human types "submit".
 - Never invent an answer. Anything not in the guide, or marked CONFIRM, pauses and asks.
@@ -102,4 +102,5 @@ This is sensitive personal and immigration data. Keep it local. Don't send it to
 - `references/partner-route.md`: spouse/partner (FM / FM-SE) evidence map, with what to re-verify.
 - `references/gotchas.md`: traps found in real applications. Skim this before the gap analysis.
 - `references/letter-templates.md`: employer, landlord/agent, council inspection, HMRC benefit-claim letters.
+- `references/browser-agent.md`: how to drive the online form and uploads in a browser, with human hand-offs. Read before phase 8.
 - `assets/case.example.json`, `assets/FORM_GUIDE.template.md`, `scripts/preflight.py`.

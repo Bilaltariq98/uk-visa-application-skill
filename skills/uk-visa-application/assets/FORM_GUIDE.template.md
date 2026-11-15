@@ -6,6 +6,8 @@ Applicant: **<NAME AS ON PASSPORT>**. Sponsor/partner (if any): **<NAME>**. Huma
 
 Rules last verified against gov.uk on: **TBD** (also set `rules_verified_on` in case.json).
 
+This file says *what* to answer. How to drive the browser (hand-offs, page loop, uploads, safety) is in the skill's `references/browser-agent.md`. Log each page to `submit/form-log.md` and screenshots to `submit/screens/`.
+
 ---
 
 ## Rules for the agent (obey all)
