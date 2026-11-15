@@ -7,9 +7,10 @@
 ![Agent Skill](https://img.shields.io/badge/Agent%20Skill-open%20format-6E56CF)
 ![Python](https://img.shields.io/badge/python-3.8%2B%20stdlib-3776AB)
 ![Status](https://img.shields.io/badge/status-beta-yellow)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ```bash
-npx skills add <github-user>/uk-visa-application-skill
+npx skills add bilaltariq98/uk-visa-application-skill
 ```
 
 Works with Claude Code, Cursor, Codex, Gemini CLI, Copilot, OpenCode and other agents that support `SKILL.md`.
@@ -66,16 +67,16 @@ Use the open [`skills`](https://github.com/vercel-labs/skills) CLI:
 
 ```bash
 # Interactive: pick your agent(s) and the install scope
-npx skills add <github-user>/uk-visa-application-skill
+npx skills add bilaltariq98/uk-visa-application-skill
 
 # Global (user-level), for every project
-npx skills add <github-user>/uk-visa-application-skill -g
+npx skills add bilaltariq98/uk-visa-application-skill -g
 
 # A specific agent only, without prompts
-npx skills add <github-user>/uk-visa-application-skill -a claude-code -g -y
+npx skills add bilaltariq98/uk-visa-application-skill -a claude-code -g -y
 
 # Preview without installing
-npx skills add <github-user>/uk-visa-application-skill --list
+npx skills add bilaltariq98/uk-visa-application-skill --list
 ```
 
 <details>
@@ -84,7 +85,7 @@ npx skills add <github-user>/uk-visa-application-skill --list
 Copy `skills/uk-visa-application/` into your agent's skills directory. For example:
 
 ```bash
-git clone https://github.com/<github-user>/uk-visa-application-skill.git
+git clone https://github.com/bilaltariq98/uk-visa-application-skill.git
 cp -r uk-visa-application-skill/skills/uk-visa-application ~/.claude/skills/   # Claude Code
 ```
 
@@ -188,3 +189,7 @@ Rule corrections and new route guides (Skilled Worker, ILR, student, etc.) are v
 
 > [!CAUTION]
 > Never commit a real `case.json`, cover letter or any evidence to a fork. They contain personal immigration data.
+
+## License
+
+[MIT](LICENSE)

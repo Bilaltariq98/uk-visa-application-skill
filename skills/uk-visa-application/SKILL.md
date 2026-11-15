@@ -1,5 +1,6 @@
 ---
 name: uk-visa-application
+license: MIT
 description: Guide a person through preparing and filling in a UK visa or immigration application agentically, with the human in the loop. Covers intake interview, evidence-pack folders, safe document triage, gap analysis against current Home Office rules, request letters (employer, landlord, council, HMRC), cover letter, a GO/NO-GO preflight, and a browser-agent form guide that stops before payment and submission. Use this whenever someone mentions a UK visa, extension, FLR, ILR, spouse/partner/family visa, Skilled Worker, eVisa, BRP, Home Office application, "leave to remain", sponsor evidence, payslips for a visa, proof of address for a visa, or wants help gathering documents or filling in a UK immigration form, even if they don't say "skill".
 ---
 
