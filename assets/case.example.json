@@ -1,0 +1,45 @@
+{
+  "_comment": "Example for a spouse/partner extension. Copy to <workspace>/submit/case.json and replace every value. Patterns are Python regexes matched against filenames; named groups: date (or start/end).",
+  "route": "Partner extension (FLR(M))",
+  "leave_expires": "2027-01-31",
+  "warn_days_left": 21,
+  "rules_verified_on": null,
+  "rules_max_age_days": 14,
+  "ids": [
+    {"label": "Applicant passport", "expires": "2030-01-01"},
+    {"label": "Sponsor passport", "expires": "2030-01-01"}
+  ],
+  "required": [
+    {"label": "Applicant passport", "folder": "01 Identity & Status", "contains": "Applicant passport"},
+    {"label": "Sponsor passport", "folder": "01 Identity & Status", "contains": "Sponsor passport"},
+    {"label": "Applicant eVisa / status", "folder": "01 Identity & Status", "contains": "eVisa"},
+    {"label": "Marriage certificate", "folder": "02 Relationship & Cohabitation", "contains": "marriage certificate"},
+    {"label": "Tenancy or title", "folder": "04 Accommodation", "contains": "Tenancy"},
+    {"label": "Council tax bill", "folder": "04 Accommodation", "contains": "Council tax"},
+    {"label": "English evidence", "folder": "05 English Language", "contains": "English"},
+    {"label": "Employer letter", "folder": "03 Financial", "contains": "Employer letter"},
+    {"label": "Final cover letter (PDF)", "folder": "06 Cover letter", "contains": "Cover letter", "suffix": ".pdf"}
+  ],
+  "recommended": [
+    {"label": "Landlord/agent occupancy letter", "folder": "04 Accommodation", "contains": "occupancy"}
+  ],
+  "fresh": [
+    {"label": "Latest payslip", "folder": "03 Financial", "pattern": "^(?P<date>\\d{4}-\\d{2}-\\d{2}) Payslip", "max_age_days": 28},
+    {"label": "Latest bank statement", "folder": "03 Financial", "pattern": "^(?P<start>\\d{4}-\\d{2}-\\d{2}) to (?P<end>\\d{4}-\\d{2}-\\d{2}) .*statement", "max_age_days": 28}
+  ],
+  "series": [
+    {
+      "label": "Monthly payslips",
+      "folder": "03 Financial",
+      "pattern": "^(?P<date>\\d{4}-\\d{2}-\\d{2}) Payslip",
+      "months": 6,
+      "covered_by": {"folder": "03 Financial", "pattern": "^(?P<start>\\d{4}-\\d{2}-\\d{2}) to (?P<end>\\d{4}-\\d{2}-\\d{2}) .*statement"}
+    }
+  ],
+  "upload_whole_folders": ["02 Relationship & Cohabitation", "07 Supporting photos"],
+  "placeholder_files": ["06 Cover letter/cover-letter-draft.md", "submit/FORM_GUIDE.md"],
+  "placeholder_markers": ["TBD", "[DATE]", "[REF]"],
+  "open_risks": [
+    "Example: benefit claim in applicant's name. Get adviser view, end claim, fill cover letter disclosure, then delete this line."
+  ]
+}
